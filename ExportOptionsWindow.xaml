@@ -1,0 +1,52 @@
+﻿<Window x:Class="Subfish.ExportOptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Subfish"
+        mc:Ignorable="d"
+            Title="Export Options" Height="462" Width="615" WindowStartupLocation="CenterOwner"
+        FontSize="18" FontFamily="Segoe UI Symbol" WindowStyle="ToolWindow" Closing="windowClosing">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10" MaxHeight="10" />
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left"/>
+        <StackPanel Grid.Row="3"   Orientation="Horizontal" HorizontalAlignment="Center"   VerticalAlignment="Bottom">
+
+            <Button FontSize="22" Click="butCancel_Click">
+                Cancel
+            </Button>
+            <Button FontSize="22" Click="buttonGo_Click" Margin="10,0,0,0">
+                Go!
+            </Button>
+        </StackPanel>
+
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="23,10,0,0" Grid.Row="3" 
+                   Text="To import into DaVinci Resolve, drag all mp4s into the project, then choose File-&gt;Import-&gt;Timeline and choose project.edl from the download dir." TextWrapping="Wrap" VerticalAlignment="Top" Height="76" Width="577"/>
+        <CheckBox x:Name="checkBox_downloadVideo" Content="After export, download any missing required mp4 videos" HorizontalAlignment="Left" Margin="10,104,0,0" Grid.Row="3" VerticalAlignment="Top" Checked="checkBox_Checked" IsChecked="True"/>
+        <CheckBox x:Name="checkBox_restartVideo" Content="Auto-fix slow video downloads" HorizontalAlignment="Left" Margin="10,143,0,0" Grid.Row="3" VerticalAlignment="Top" Checked="checkBox_Checked" IsChecked="True"/>
+        <StackPanel HorizontalAlignment="Left" Height="41" Margin="23,216,0,0" Grid.Row="3" VerticalAlignment="Top" Width="474" Orientation="Horizontal">
+            <Label  HorizontalAlignment="Left" Content="Seconds spacing between clips" VerticalAlignment="Bottom">
+            </Label>
+            <TextBox x:Name="editSpacingBetweenClipsSeconds" Text="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="40"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="71" Margin="23,216,0,0" Grid.Row="3" VerticalAlignment="Top" Width="474" Orientation="Horizontal">
+            <Label  HorizontalAlignment="Left" Content="Clip start mod (Seconds)" VerticalAlignment="Bottom">
+            </Label>
+            <TextBox x:Name="editClipStartModSeconds" Text="-1.7" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="40" />
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="71" Margin="23,246,0,0" Grid.Row="3" VerticalAlignment="Top" Width="474" Orientation="Horizontal">
+            <Label  HorizontalAlignment="Left" Content="Clip end mod (Seconds)" VerticalAlignment="Bottom">
+            </Label>
+            <TextBox x:Name="editClipEndModSeconds" Text="-1" VerticalAlignment="Bottom" Width="40" />
+        </StackPanel>
+    </Grid>
+</Window>

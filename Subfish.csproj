@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Company>Robinson Technologies</Company>
+    <Authors>Seth A. Robinson</Authors>
+    <PackageId>com.rtsoft.Subfish</PackageId>
+    <ApplicationIcon>Icon1.ico</ApplicationIcon>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <DefineConstants>TRACE;DEBUG;C_PRO_VERSION</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <DefineConstants>TRACE;C_PRO_VERSION</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="tempbuild\**" />
+    <EmbeddedResource Remove="tempbuild\**" />
+    <None Remove="tempbuild\**" />
+    <Page Remove="tempbuild\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.902.49" />
+  </ItemGroup>
+
+</Project>
