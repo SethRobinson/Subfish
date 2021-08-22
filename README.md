@@ -6,7 +6,7 @@
 
 * Download all subtitles from a channel or playlist
 * Search subtitles for keywords (regex supported)
-* Export video timeline of all found clips as .EDL for Premiere or DaVinci Resolve ([image](https://www.codedojo.com/wp-content/uploads/2021/06/subfish_screenshot.png))
+* Export video timeline of all found clips as .EDL for Premiere or DaVinci Resolve ([image](https://www.codedojo.com/wp-content/uploads/2021/06/subfish_edl_export.png))
 
 **To run it:**
 
