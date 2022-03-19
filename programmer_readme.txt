@@ -7,3 +7,5 @@ Credits & attributions:
 
 youtube-dl: https://github.com/ytdl-org/youtube-dl
 License: The Unlicense: https://github.com/ytdl-org/youtube-dl/blob/master/LICENSE
+
+yt-dlp: https://github.com/yt-dlp/yt-dlp  (fork of youtube-dl with more features, same license)

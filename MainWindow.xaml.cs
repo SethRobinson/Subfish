@@ -41,10 +41,11 @@ namespace Subfish
         private static object _syncLock = new object();
         public const string C_SUBDIR = "download";
     
-        const string C_STRING_VERSION = "1.06";
+        const string C_STRING_VERSION = "1.07";
         const int C_SLOW_TIME_NEEDED_TO_RESTART_MS = 1000 * 20;
         bool C_USE_SAFE_FILENAMES = true;
         const string m_actionButtonDefaultText = "Go! (Acquire subtitle data)";
+        string C_YOUTUBE_DL_EXE = "yt-dlp.exe";
 
         public void AddLineToLog(string line)
         {
@@ -162,7 +163,7 @@ namespace Subfish
 
             if (e.Data == null) return;
 
-            //a total hack to supress noisy messages
+            //a total hack to suppress noisy messages
             if (e.Data.Contains("[download]") && e.Data.Contains("ETA"))
             {
 
@@ -358,10 +359,10 @@ namespace Subfish
 
             //--write-description --write-info-json   
             string args = "-o "+GetYoutubeDLFileNameFormat()+" "+moreOptions +" "+downloadOptionsWindow.textCustomParms.Text+" --write-auto-sub " + language + "-4 --no-mark-watched --write-info-json --ignore-errors  --write-sub --sub-format ttml " + url;
-
-            AddLineToLog("Downloading data with youtube-dl.exe " + args);
+             
+            AddLineToLog("Downloading data with "+ C_YOUTUBE_DL_EXE+" " + args);
             lastOperationClicked = eLastOperationClicked.DOWNLOAD_SUBS;
-            await Task.Run(() => RunExternalExe("tools\\youtube-dl.exe", args));
+            await Task.Run(() => RunExternalExe("tools\\"+ C_YOUTUBE_DL_EXE, args));
         }
 
         string GetYoutubeDLFileNameFormat()
@@ -486,7 +487,8 @@ namespace Subfish
         }
         string GetVideoOptions()
         {
-            return "--format \"bestvideo[height <= 720][ext = mp4] + bestaudio[ext = m4a]\" --embed-subs ";
+            return "--format \"bestvideo[ext = mp4] + bestaudio[ext = m4a]\" --embed-subs ";
+            //return "--format \"bestvideo[height <= 720][ext = mp4] + bestaudio[ext = m4a]\" --embed-subs ";
         }
 
 
@@ -677,10 +679,10 @@ namespace Subfish
                     videoFileNameFormat = GetYoutubeDLFileNameFormat();
                 }
                 string args = "-o " + videoFileNameFormat + " "+GetVideoOptions()+"-4 --no-mark-watched --ignore-errors --batch-file " + videoTextFile;
-                AddLineToLog("Downloading data with youtube-dl.exe " + args);
+                AddLineToLog("Downloading data with "+ C_YOUTUBE_DL_EXE+" "+ args);
                 lastOperationClicked = eLastOperationClicked.EXPORT_EDL;
 
-                await Task.Run(() => RunExternalExe("tools\\youtube-dl.exe", args));
+                await Task.Run(() => RunExternalExe("tools\\"+ C_YOUTUBE_DL_EXE, args));
             }
         }
 

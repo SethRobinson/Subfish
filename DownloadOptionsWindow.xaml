@@ -55,7 +55,7 @@
 
             <StackPanel Orientation="Horizontal">
             <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" 
-            Text="Custom parms for youtube-dl (optional):"   />
+            Text="Custom parms for yt-dlp (optional):"   />
             <TextBox x:Name="textCustomParms" Text="" Margin="5,0,0,0" Width="353" />
             </StackPanel>
         </StackPanel>
