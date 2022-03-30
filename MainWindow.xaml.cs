@@ -41,7 +41,7 @@ namespace Subfish
         private static object _syncLock = new object();
         public const string C_SUBDIR = "download";
     
-        const string C_STRING_VERSION = "1.07";
+        const string C_STRING_VERSION = "1.08";
         const int C_SLOW_TIME_NEEDED_TO_RESTART_MS = 1000 * 20;
         bool C_USE_SAFE_FILENAMES = true;
         const string m_actionButtonDefaultText = "Go! (Acquire subtitle data)";
@@ -178,7 +178,7 @@ namespace Subfish
                 {
                     string speed = e.Data.Substring(startPos + startChars.Length, slashPos-(startPos + startChars.Length));
                       
-                    float kbitSpeed = float.Parse(StripNonNumbers(speed));
+                    float kbitSpeed = float.Parse(StripNonNumbers(speed), CultureInfo.InvariantCulture);
                     if (speed.Contains("GiB"))
                     {
                         kbitSpeed *= 1024 * 1024;
@@ -586,10 +586,10 @@ namespace Subfish
                 float startTime = item.StartTime;
                 float endTime = item.EndTime;
 
-                startTime += float.Parse(exportOptionsWindow.editClipStartModSeconds.Text);
+                startTime += float.Parse(exportOptionsWindow.editClipStartModSeconds.Text, CultureInfo.InvariantCulture);
                 if (startTime < 0) startTime = 0;
                 
-                endTime += float.Parse(exportOptionsWindow.editClipEndModSeconds.Text);
+                endTime += float.Parse(exportOptionsWindow.editClipEndModSeconds.Text, CultureInfo.InvariantCulture);
               
                 string clipStartTime = SecondsToEDLTime(startTime);
                 string clipEndTime = SecondsToEDLTime(endTime);
@@ -603,7 +603,7 @@ namespace Subfish
                 string path = System.AppDomain.CurrentDomain.BaseDirectory + C_SUBDIR + "\\";
                 //actually let's not write the full path, doesn't seem to help anything
                 path = "";
-                movieTime += TimeSpan.FromSeconds(float.Parse(exportOptionsWindow.editSpacingBetweenClipsSeconds.Text));
+                movieTime += TimeSpan.FromSeconds(float.Parse(exportOptionsWindow.editSpacingBetweenClipsSeconds.Text, CultureInfo.InvariantCulture));
 
                 //WRITE VIDEO TRACK
                 clipIndex++;
@@ -731,9 +731,9 @@ namespace Subfish
             Debug.Assert(time.Length == 12);
             float timeSeconds = 0;
             var parts = time.Split(":");
-            timeSeconds += float.Parse(parts[2]);
-            timeSeconds += float.Parse(parts[1]) * 60;
-            timeSeconds += float.Parse(parts[0]) * 60 * 60;
+           timeSeconds += float.Parse(parts[2], CultureInfo.InvariantCulture); //without the cultureinfo thing, it will crash on Windows set to Person region format
+            timeSeconds += float.Parse(parts[1], CultureInfo.InvariantCulture) * 60;
+            timeSeconds += float.Parse(parts[0], CultureInfo.InvariantCulture) * 60 * 60;
 
             return timeSeconds;
         }
@@ -777,12 +777,13 @@ namespace Subfish
                     hitItem.Text = element.Value;
                                   
                     hitItem.ID = item.ID;
+                    
                     hitItem.StartTimeEDL = element.Attribute("begin").Value;
                     hitItem.EndTimeEDL = element.Attribute("end").Value;
                     hitItem.FileName = item.FileName;
                     hitItem.StartTime = YouTubeTimeToSeconds(element.Attribute("begin").Value);
                     hitItem.EndTime = YouTubeTimeToSeconds(element.Attribute("end").Value);
-                    hitItem.Time = float.Parse(string.Format("{0:0.#}", hitItem.StartTime));
+                    hitItem.Time = float.Parse(string.Format("{0:0.#}", hitItem.StartTime, CultureInfo.InvariantCulture));
                     hitItem.Date = item.Date;
                     hitItem.Date.AddSeconds(hitItem.StartTime); //so sorting will still be accurate
                     hitItem.JSONTextCounter = textCounter;
@@ -869,7 +870,7 @@ namespace Subfish
 
             if (gridSubFileInfo.Items.Count == 0)
             {
-                AddLineToLog("There are currently no subttitles to search yet.  To get some, enter a youtube URL and click the \"Go! (Acquire subtitle data)\" button.");
+                AddLineToLog("There are currently no subtitles to search yet.  To get some, enter a youtube URL and click the \"Go! (Acquire subtitle data)\" button.");
                 return;
             }
             AddLineToLog("Scanning subtitles for " + tFilter);
