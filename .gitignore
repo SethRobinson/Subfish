@@ -1,0 +1,54 @@
+# Build output
+bin/*
+!bin/tools/
+!bin/ScriptsForDaVinciResolve/
+obj/
+tempbuild/
+
+# Visual Studio / IDE files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio upgrade log
+UpgradeLog.htm
+
+# NuGet packages (restore from nuget.config)
+packages/
+*.nupkg
+
+# Windows files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Release zips
+*.zip
+
+# Old versions backup
+OldVersions/
+
+# Note: bin/* ignores build output, but bin/tools/ and bin/ScriptsForDaVinciResolve/ are included
+
+# WebView2 cache
+SubFish.exe.WebView2/
+
+# Backup files
+*.bak
+*~
+
+# Log files
+*.log
+
+# PSD source files (keep only final images if needed)
+media/*.psd
+
+CreateGitHubRepository.bat
+seth_notes.txt
+media/blog_thumb_506_285.jpg
+media/Youtube-thumbnail.jpg
+ResolveScriptBackup/
+.DS_Store
+

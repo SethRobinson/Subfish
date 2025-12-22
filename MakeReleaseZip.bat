@@ -2,8 +2,8 @@ call app_info_setup.bat
 
 echo %CUR_PATH%
 
-call vcvarsall.bat x64
-msbuild.exe Subfish.sln /t:Clean,Build /p:Configuration=Release /p:Platform="Any CPU" /m
+REM Build using dotnet CLI (works for .NET 5+ projects)
+dotnet build Subfish.sln -c Release
 
 rmdir tempbuild /S /Q
 mkdir tempbuild

@@ -41,7 +41,7 @@ namespace Subfish
         private static object _syncLock = new object();
         public const string C_SUBDIR = "download";
     
-        const string C_STRING_VERSION = "1.08";
+        const string C_STRING_VERSION = "1.09";
         const int C_SLOW_TIME_NEEDED_TO_RESTART_MS = 1000 * 20;
         bool C_USE_SAFE_FILENAMES = true;
         const string m_actionButtonDefaultText = "Go! (Acquire subtitle data)";
@@ -177,8 +177,15 @@ namespace Subfish
                 if (slashPos != -1 && startPos != -1)
                 {
                     string speed = e.Data.Substring(startPos + startChars.Length, slashPos-(startPos + startChars.Length));
-                      
-                    float kbitSpeed = float.Parse(StripNonNumbers(speed), CultureInfo.InvariantCulture);
+                    string numericSpeed = StripNonNumbers(speed);
+
+                    if (string.IsNullOrWhiteSpace(numericSpeed))
+                    {
+                        // Skip this update - speed is unknown
+                        return;     
+                    }
+
+                    float kbitSpeed = float.Parse(numericSpeed, CultureInfo.InvariantCulture);
                     if (speed.Contains("GiB"))
                     {
                         kbitSpeed *= 1024 * 1024;
