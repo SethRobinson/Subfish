@@ -14,6 +14,7 @@ using System.Xml.Linq;
 using System.Globalization;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+using Microsoft.Web.WebView2.Core;
 
 //Disable warning "CS0168: The variable 'ex' is declared but never used", I mean, I know, but I still want it like that because I need the try/catch block there
 #pragma warning disable 0168
@@ -306,8 +307,29 @@ namespace Subfish
             AddLineToLog("To get started enter a URL to a youtube video and click the 'Go!' button. You can then type a search word and click find.");
             AddLineToLog("Hint: You can also enter the URL to a a playlist or a youtube channel's 'videos' page to get them all.");
             
-            NavigateToWebPage("https://www.rtsoft.com/subfish/checking_for_new_version.php?version=" + C_STRING_VERSION+ extra_parms);
+            // Initialize WebView2 asynchronously
+            InitializeWebView2Async("https://www.rtsoft.com/subfish/checking_for_new_version.php?version=" + C_STRING_VERSION + extra_parms);
+        }
 
+        private async void InitializeWebView2Async(string initialUrl)
+        {
+            try
+            {
+                // Use AppData for WebView2 user data to avoid permission issues
+                var userDataFolder = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "Subfish", "WebView2");
+                
+                var env = await CoreWebView2Environment.CreateAsync(null, userDataFolder);
+                await webBrowser.EnsureCoreWebView2Async(env);
+                
+                textDisplayURL.Text = initialUrl;
+                webBrowser.CoreWebView2.Navigate(initialUrl);
+            }
+            catch (Exception ex)
+            {
+                AddLineToLog("WebView2 initialization failed: " + ex.Message);
+            }
         }
 
 
@@ -816,7 +838,14 @@ namespace Subfish
         async void NavigateToWebPage(string url)
         {
             textDisplayURL.Text = url;
-            await webBrowser.EnsureCoreWebView2Async();
+            // Wait for WebView2 to be initialized if not already
+            if (webBrowser.CoreWebView2 == null)
+            {
+                var exeDir = AppDomain.CurrentDomain.BaseDirectory;
+                var userDataFolder = Path.Combine(exeDir, "Subfish.WebView2");
+                var env = await CoreWebView2Environment.CreateAsync(null, userDataFolder);
+                await webBrowser.EnsureCoreWebView2Async(env);
+            }
             webBrowser.CoreWebView2.Navigate(url);
         }
 
