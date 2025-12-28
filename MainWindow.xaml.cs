@@ -380,7 +380,12 @@ namespace Subfish
             {
                 moreOptions += GetVideoOptions();
             }
-            else
+            if (downloadOptionsWindow.checkBox_exportAudio.IsChecked == true)
+            {
+                moreOptions += GetAudioOptions();
+            }
+            if (downloadOptionsWindow.checkBox_exportVideo.IsChecked != true && 
+                downloadOptionsWindow.checkBox_exportAudio.IsChecked != true)
             {
                 moreOptions += "--skip-download ";
             }
@@ -520,6 +525,10 @@ namespace Subfish
             //return "--format \"bestvideo[height <= 720][ext = mp4] + bestaudio[ext = m4a]\" --embed-subs ";
         }
 
+        string GetAudioOptions()
+        {
+            return "-x --audio-format mp3 --audio-quality 0 ";
+        }
 
         void RestartExportDownloads()
         {

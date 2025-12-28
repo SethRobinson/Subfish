@@ -69,7 +69,7 @@
 
             <StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right">
               
-                <Button x:Name="buttonURL" Click="MainButton_Click" Content="Go! (Acquire subtitle data)" Margin="0" HorizontalAlignment="Right"/>
+                <Button x:Name="buttonURL" Click="MainButton_Click" Content="Process URL" Margin="0" HorizontalAlignment="Right"/>
 
             </StackPanel>
         </Grid>
