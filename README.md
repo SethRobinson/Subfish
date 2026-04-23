@@ -10,6 +10,8 @@
 
 **History**
 
+- **April 23, 2026** - Updated with latest yt-dlp, works with Youtube again
+
 - **December 22, 2025** - Updated with latest FFmpeg and yt-dlp.  Updated to use .NET 9.0 instead of 5.0.  verified it works with Youtube again
 
 **To run it:**

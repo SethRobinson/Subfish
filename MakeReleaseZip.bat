@@ -20,8 +20,8 @@ copy bin\%APP_NAME%.exe tempbuild
 copy bin\%APP_NAME%.dll tempbuild
 copy readme.txt tempbuild
 copy "bin\download\subtitles and videos get downloaded here.txt" tempbuild\download
-call %RT_PROJECTS%\Signing\sign.bat tempbuild\%APP_NAME%.exe "%APP_NAME%"
-call %RT_PROJECTS%\Signing\sign.bat tempbuild\%APP_NAME%.dll "%APP_NAME%"
+call %RT_PROJECTS%\Signing\sign.bat tempbuild\%APP_NAME%.exe "%APP_NAME%" "https://github.com/SethRobinson/Subfish"
+call %RT_PROJECTS%\Signing\sign.bat tempbuild\%APP_NAME%.dll "%APP_NAME%" "https://github.com/SethRobinson/Subfish"
 
 :create the archive
 set FNAME=%APP_NAME%Windows.zip

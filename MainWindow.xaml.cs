@@ -42,7 +42,7 @@ namespace Subfish
         private static object _syncLock = new object();
         public const string C_SUBDIR = "download";
     
-        const string C_STRING_VERSION = "1.09";
+        const string C_STRING_VERSION = "1.10";
         const int C_SLOW_TIME_NEEDED_TO_RESTART_MS = 1000 * 20;
         bool C_USE_SAFE_FILENAMES = true;
         const string m_actionButtonDefaultText = "Go! (Acquire subtitle data)";
